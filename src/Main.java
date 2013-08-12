@@ -1,8 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
+
+import com.ex.algorithm.graph.TopoSort2;
+import com.ex.algorithm.graph.WordConnect;
+import com.ex.algorithm.test.EventText;
+import com.ex.algorithm.test.Paranoid;
+import com.ex.algorithm.tree.Heap;
+import com.ex.algorithm.tree.NERD;
 
 
 public class Main {
@@ -24,7 +31,9 @@ public class Main {
         	String input = getString();
         }
         **/
-		testTopoSort2();
+//		testWordConnect();
+//		testEventText();
+		testParanoid();
 	}
 	
 	private static String peekToken() {
@@ -56,13 +65,59 @@ public class Main {
 		return Integer.parseInt(nextToken());
 	}
 
+
 	private static String getString() {
 		return nextToken();
 	}
 	
 	
+	public static void testParanoid() {
+		LinkedList<Paranoid.Point> queue = new LinkedList<Paranoid.Point>();
+		queue.add(new Paranoid.Point(0, 2, 5));
+		queue.add(new Paranoid.Point(2, 4, 15));
+		queue.add(new Paranoid.Point(3, 3, 19));
+		queue.add(new Paranoid.Point(0, 1, 2));
+		queue.add(new Paranoid.Point(3, 0, 16));
+		queue.add(new Paranoid.Point(2, 1, 12));
+		Paranoid pr = new Paranoid(5, queue);
+		pr.solve();
+	}
+	public static void testEventText() {
+		
+		ArrayList<String> text = new ArrayList<String>();
+//		text.add("핸디 방걸레 리필/걸레/밀대/청소기/초극세사/유리창/창문/세차/좋은집꾸미기/AJ5521");
+		text.add("[엔틱가구]엔틱책상/좌식컴퓨터책상/PC책상세트/유선컴퓨터책상 GA454-6");
+		text.add("◆무료배송/서인영 마스카라◆메이블린 샤이니 블랙 마스카라+대용량화장솜◆");
+		text.add("[파격세일!!]씽씽 주니어 중국어 2 (CD 1 + 별책 1 포함)");
+		text.add("핸디 방걸레 리필/걸레/밀대/청소기/초극세사/유리창/창문/세차/좋은집꾸미기/AJ5521");
+		text.add("[파격세일!!]코렐그린티 소접시1P/코렐하우스/원더키친 ");
+		text.add("[파격세일!!]축구공(102)");
+		text.add("[파격세일!!]FBI 시크릿");
+		
+		EventText et = new EventText(text);
+		et.solve();
+		
+	}
+	
+	public static void testWordConnect() {
+		ArrayList<String> words = new ArrayList<String>();
+		words.add("ab");
+		words.add("cd");
+//		words.add("aa");
+//		words.add("ab");
+//		words.add("bb");
+//		words.add("dog");
+//		words.add("god");
+//		words.add("dragon");
+//		words.add("need");
+		WordConnect wc = new WordConnect(words);
+		wc.solve();
+	}
+	
+	
 	public static void testTopoSort2() {
 
+		/**
 		TopoSort2.Vertex v1 = new TopoSort2.Vertex(1);
 		TopoSort2.Vertex v2 = new TopoSort2.Vertex(2);
 		TopoSort2.Vertex v3 = new TopoSort2.Vertex(3);
@@ -87,7 +142,29 @@ public class Main {
 		vertexes.add(v9);
 		vertexes.add(v10);
 		
+		*/
+
+		ArrayList<TopoSort2.Vertex> vertexes = new ArrayList<TopoSort2.Vertex>();
+		
+		for(int i = 0; i < 26; i++) {
+			vertexes.add(new TopoSort2.Vertex(i + 'a'));
+		}
 		TopoSort2 ts2 = new TopoSort2(vertexes);
+		
+		ArrayList<String> words = new ArrayList<String>();
+//		words.add("dictionary");
+//		words.add("english");
+//		words.add("is");
+//		words.add("ordered");
+//		words.add("ordinary");
+//		words.add("this");
+		words.add("gg");
+		words.add("kia");
+		words.add("lotte");
+		words.add("lg");
+		words.add("hanwha");
+//		ts2.makeGraph(words);
+		/**
 		ts2.updateAdjacentList(1, 2);
 		ts2.updateAdjacentList(2, 3);
 		ts2.updateAdjacentList(3, 4);
@@ -99,10 +176,13 @@ public class Main {
 		ts2.updateAdjacentList(8, 2);
 		ts2.updateAdjacentList(9, 4);
 		ts2.updateAdjacentList(10, 3);
+		**/
 		
 		ts2.dfsAll();
 		
 	}
+
+	/**
 	public static void testTopoSort() {
 		
 		ArrayList<TopoSort.Vertex> vertexes = new ArrayList<TopoSort.Vertex>();
@@ -167,6 +247,7 @@ public class Main {
 			System.out.print(vertex.value + " -> ");
 		}
 	}
+	**/
 	
 	public static void testEncryption(String input) {
 		StringEncryption st = new StringEncryption(input);
