@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+import com.ex.algorithm.graph.SortingGame;
 import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.EventText;
@@ -20,20 +22,19 @@ public class Main {
 	private static String line;
 
 	public static void main(String[] args) {
-		/**
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
         int cases = 0;
         cases = getInt();
 		
         while(cases-- > 0) {
-//            System.out.println("People, " + people);
-        	String input = getString();
+        	int length = getInt();
+        	ArrayList<Integer> input = new ArrayList<Integer>(length);
+        	for(int i = 0; i < length; i++) {
+        		input.add(getInt());
+        	}
+        	testSortingGame(input);
         }
-        **/
-//		testWordConnect();
-//		testEventText();
-		testParanoid();
 	}
 	
 	private static String peekToken() {
@@ -69,7 +70,124 @@ public class Main {
 	private static String getString() {
 		return nextToken();
 	}
+
+	/**
+	public static class SortingGame {
+
+		private ArrayList<Integer> input;
+		private Vertex expected;
+		private ArrayDeque<Vertex> queue;
+		private HashSet<Vertex> hashSet;
+
+		public SortingGame(ArrayList<Integer> input) {
+			this.input = input;
+			ArrayList<Integer> sortedList;
+			Collections.sort(sortedList = new ArrayList<Integer>(input));
+
+			expected = new Vertex(sortedList);
+
+			queue = new ArrayDeque<SortingGame.Vertex>();
+			hashSet = new HashSet<Vertex>();
+		}
+
+		public void solve() {
+			final Vertex v = new Vertex(input);
+			queue.add(v);
+			hashSet.add(v);
+
+			while(!queue.isEmpty()) {
+
+				if(expected.equals(queue.peek())) {
+					Vertex resultVertex = queue.peek();
+					System.out.println(resultVertex.depth);
+
+					break;
+				}
+
+				Vertex parentVertex = queue.remove();
+
+				ArrayList<Integer> numList = parentVertex.value;
+				List<Integer> subList;
+				for(int i = 0; i < numList.size(); i++) {
+					for(int j = i + 1; j <= numList.size(); j++) {
+						subList = numList.subList(i, j);
+						subList = new ArrayList<Integer>(subList);
+						Collections.reverse(subList);
+
+						ArrayList<Integer> newList = new ArrayList<Integer>();
+						newList.addAll(numList.subList(0, i));
+						newList.addAll(subList);
+						newList.addAll(numList.subList(j, numList.size()));
+						int depth = parentVertex.depth;
+						Vertex newVertex = new Vertex(newList);
+						newVertex.parent = parentVertex;
+
+						if(!hashSet.contains(newVertex)) {
+							newVertex.depth = ++depth;
+							queue.add(newVertex);
+							hashSet.add(newVertex);
+						}
+					}
+				}
+			}
+		}
+
+		public static class Vertex {
+			public Vertex parent;
+			public ArrayList<Integer> value;
+			public int depth;
+			public Vertex(ArrayList<Integer> value) {
+				this.value = value;
+			}
+
+			@Override
+			public String toString() {
+				StringBuffer sb = new StringBuffer();
+				sb.append("[");
+				for(Integer i : value) {
+					sb.append(i + " ");
+				}
+				sb.append("], d: " + depth);
+				return sb.toString();
+			}
+
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result + ((value == null) ? 0 : value.get(0) * value.size());
+				return result;
+			}
+
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+
+				Vertex other = (Vertex) obj;
+
+				for(int i = 0; i < value.size(); i++) {
+					if(value.get(i) != other.value.get(i)) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+		}
+	}
+	*/
 	
+	
+	public static void testSortingGame(ArrayList<Integer> input) {
+		SortingGame sg = new SortingGame(input);
+		sg.solve2();
+//		sg.solve();
+	}
 	
 	public static void testParanoid() {
 		LinkedList<Paranoid.Point> queue = new LinkedList<Paranoid.Point>();
