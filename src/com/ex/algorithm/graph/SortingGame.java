@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,8 +12,8 @@ public class SortingGame {
 	private ArrayList<Integer> input;
 	private Vertex expected;
 	private ArrayDeque<Vertex> queue;
-	private HashSet<Vertex> hashSet;
-	private HashMap<Integer, HashSet<Vertex>> hashMap;
+	private ArrayList<Vertex> vertexList;
+	private HashMap<Integer, ArrayList<Vertex>> hashMap;
 	
 	public SortingGame(ArrayList<Integer> input) {
 		this.input = input;
@@ -24,20 +23,19 @@ public class SortingGame {
 		expected = new Vertex(sortedList);
 		
 		queue = new ArrayDeque<SortingGame.Vertex>();
-		hashSet = new HashSet<Vertex>();
-		hashMap = new HashMap<Integer, HashSet<Vertex>>();
+		vertexList = new ArrayList<Vertex>();
+		hashMap = new HashMap<Integer, ArrayList<Vertex>>();
 	}
 	
 	public void solve() {
 		final Vertex v = new Vertex(input);
 		queue.add(v);
-		hashSet.add(v);
+		vertexList.add(v);
 		
 		int count = 0;
 
 		while(!queue.isEmpty()) {
 
-			/**
 			if(expected.equals(queue.peek())) {
 				Vertex resultVertex = queue.peek();
 				System.out.println(resultVertex.depth);
@@ -48,9 +46,9 @@ public class SortingGame {
 					resultVertex.parent = resultVertex.parent.parent;
 					
 				}
+				 **/
 				break;
 			}
-		**/
 			
 			Vertex parentVertex = queue.remove();
 			
@@ -62,7 +60,7 @@ public class SortingGame {
 					subList = new ArrayList<Integer>(subList);
 					Collections.reverse(subList);
 
-					ArrayList<Integer> newList = new ArrayList<Integer>();
+					ArrayList<Integer> newList = new ArrayList<Integer>(numList.size());
 					newList.addAll(numList.subList(0, i));
 					newList.addAll(subList);
 					newList.addAll(numList.subList(j, numList.size()));
@@ -70,10 +68,10 @@ public class SortingGame {
 					Vertex newVertex = new Vertex(newList);
 					newVertex.parent = parentVertex;
 
-					if(!hashSet.contains(newVertex)) {
+					if(!vertexList.contains(newVertex)) {
 						newVertex.depth = ++depth;
 						queue.add(newVertex);
-						hashSet.add(newVertex);
+						vertexList.add(newVertex);
 					}
 					count++;
 				}
@@ -87,28 +85,26 @@ public class SortingGame {
 		Vertex v = convertInputVertex();
 
 		preCalc(input.size());
-		/**
 		
-		HashSet<Vertex> set = hashMap.get(input.size());
-		Iterator<Vertex> it = set.iterator();
+		ArrayList<Vertex> list = hashMap.get(input.size());
+		Iterator<Vertex> it = list.iterator();
 		while(it.hasNext()) {
 			Vertex target = it.next();
 			if(target.equals(v)) {
-				System.out.println(target);
+				System.out.println(target.depth);
 				break;
 			}
 		}
-		**/
 	}
 	
 	private void preCalc(int length) {
-		HashSet<Vertex> set = hashMap.get(length);
-		if(set != null)
+		ArrayList<Vertex> vList = hashMap.get(length);
+		if(vList != null)
 			return;
 		
-		set = new HashSet<Vertex>();
+		vList = new ArrayList<Vertex>(length);
 
-		hashMap.put(length, set);
+		hashMap.put(length, vList);
 
 		ArrayList<Integer> virtualInput = new ArrayList<Integer>();
 		
@@ -116,18 +112,11 @@ public class SortingGame {
 			virtualInput.add(i);
 		}
 		
-		System.out.println("start");
-		for(int j = 0; j < 40320; j++) {
-			System.out.println("");
-		}
-
-		System.out.println("end");
-
 		input = virtualInput;
 
 		final Vertex v = new Vertex(input);
 		queue.add(v);
-		set.add(v);
+		vList.add(v);
 
 		int count = 0;
 		while(!queue.isEmpty()) {
@@ -137,33 +126,44 @@ public class SortingGame {
 			ArrayList<Integer> numList = parentVertex.value;
 			pivot = parentVertex.pivot;
 			List<Integer> subList;
+			long time = 0l;
 			for(int i = pivot; i < numList.size(); i++) {
 				for(int j = i + 2; j <= numList.size(); j++) {
+					time = System.nanoTime();
 					subList = numList.subList(i, j);
 					subList = new ArrayList<Integer>(subList);
-					Collections.reverse(subList);
+					System.out.println("subList: "  + (System.nanoTime() - time) / 100);
 
+					time = System.nanoTime();
+					Collections.reverse(subList);
+					System.out.println("reverse: "  + (System.nanoTime() - time) / 100);
+
+					time = System.nanoTime();
 					ArrayList<Integer> newList = new ArrayList<Integer>();
 					newList.addAll(numList.subList(0, i));
 					newList.addAll(subList);
 					newList.addAll(numList.subList(j, numList.size()));
+					System.out.println("addAll: "  + (System.nanoTime() - time) / 100);
 					int depth = parentVertex.depth;
+
 					Vertex newVertex = new Vertex(newList);
 					newVertex.parent = parentVertex;
 
-					if(!set.contains(newVertex)) {
+//					time = System.nanoTime();
+//					if(!vList.contains(newVertex)) {
+//						System.out.println("set contains: "  + (System.nanoTime() - time) / 100);
 						newVertex.depth = ++depth;
 						newVertex.pivot = i + 1;
 						queue.add(newVertex);
-						set.add(newVertex);
-					}
+						time = System.nanoTime();
+						vList.add(newVertex);
+						System.out.println("set add: "  + (System.nanoTime() - time) / 100);
+//					}
+
 					count++;
 				}
 			}
 		}
-		
-		System.out.println("count: " + count);
-		System.out.println("setSize: " + set.size());
 	}
 	
 	private Vertex convertInputVertex() {
