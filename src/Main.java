@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import com.ex.algorithm.graph.SortingGame;
 import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
+import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
 import com.ex.algorithm.test.Paranoid;
 import com.ex.algorithm.tree.Heap;
@@ -22,6 +23,7 @@ public class Main {
 	private static String line;
 
 	public static void main(String[] args) {
+		/**
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
         int cases = 0;
@@ -35,6 +37,9 @@ public class Main {
         	}
         	testSortingGame(input);
         }
+        **/
+		
+		testBarrack();
 	}
 	
 	private static String peekToken() {
@@ -69,6 +74,14 @@ public class Main {
 
 	private static String getString() {
 		return nextToken();
+	}
+	
+	private static void testBarrack() {
+//		int[][] input = {{8, 3}, {7, -4}, {8, 1}, {-2 , 1}, {6, -2}};
+		int[][] input = {{8, 3}, {7, -4}, {8, 1}, {-2, 1}, {6, 2}};
+		Barrack bk = new Barrack(input);
+		bk.solve();
+		
 	}
 
 	/**
