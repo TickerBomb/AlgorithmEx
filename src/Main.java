@@ -1,16 +1,17 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+import com.ex.algorithm.dynamic.Boggle;
 import com.ex.algorithm.graph.SortingGame;
 import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
 import com.ex.algorithm.test.Paranoid;
+import com.ex.algorithm.test.Xhaeneung;
 import com.ex.algorithm.tree.Heap;
 import com.ex.algorithm.tree.NERD;
 
@@ -30,16 +31,15 @@ public class Main {
         cases = getInt();
 		
         while(cases-- > 0) {
-        	int length = getInt();
-        	ArrayList<Integer> input = new ArrayList<Integer>(length);
-        	for(int i = 0; i < length; i++) {
-        		input.add(getInt());
-        	}
-        	testSortingGame(input);
+        	String left = getString();
+        	String operation = getString();
+        	String right = getString();
+        	getString();
+        	String result = getString();
+        	testXhaeneung(left, operation, right, result);
         }
         **/
-		
-		testBarrack();
+		testBoggle();
 	}
 	
 	private static String peekToken() {
@@ -76,6 +76,37 @@ public class Main {
 		return nextToken();
 	}
 	
+	private static void testBoggle() {
+		
+		ArrayList<String> input = new ArrayList<String>();
+		input.add("URLPM");
+		input.add("XPRET");
+		input.add("GIAET");
+		input.add("XTNZY");
+		input.add("XOQRS");
+		
+		char[][] q = new char[5][];
+		
+		for(int i = 0; i < input.size(); i++) {
+			q[i] = input.get(i).toCharArray();
+		}
+
+		Boggle boggle = new Boggle(q, "PRETTY");
+		boggle.printInput();
+		boggle.solve();
+	}
+	
+	private static void testXhaeneung(String left, String operation, String right, String result) {
+		Xhaeneung xe = new Xhaeneung(left, operation, right, result);
+		if(xe.solve()) {
+			System.out.println("Yes");
+		}
+		else {
+			System.out.println("No");
+		}
+	}
+
+	
 	private static void testBarrack() {
 //		int[][] input = {{8, 3}, {7, -4}, {8, 1}, {-2 , 1}, {6, -2}};
 		int[][] input = {{8, 3}, {7, -4}, {8, 1}, {-2, 1}, {6, 2}};
@@ -83,7 +114,6 @@ public class Main {
 		bk.solve();
 		
 	}
-
 
 	public static void testSortingGame(ArrayList<Integer> input) {
 		SortingGame sg = new SortingGame(input);
@@ -133,7 +163,6 @@ public class Main {
 		WordConnect wc = new WordConnect(words);
 		wc.solve();
 	}
-	
 	
 	public static void testTopoSort2() {
 
@@ -202,73 +231,6 @@ public class Main {
 		
 	}
 
-	/**
-	public static void testTopoSort() {
-		
-		ArrayList<TopoSort.Vertex> vertexes = new ArrayList<TopoSort.Vertex>();
-		
-		TopoSort.Vertex v1 = new TopoSort.Vertex("1");
-		TopoSort.Vertex v2 = new TopoSort.Vertex("2");
-		TopoSort.Vertex v3 = new TopoSort.Vertex("3");
-		TopoSort.Vertex v4 = new TopoSort.Vertex("4");
-		TopoSort.Vertex v5 = new TopoSort.Vertex("5");
-		TopoSort.Vertex v6 = new TopoSort.Vertex("6");
-		TopoSort.Vertex v7 = new TopoSort.Vertex("7");
-		TopoSort.Vertex v8 = new TopoSort.Vertex("8");
-		TopoSort.Vertex v9 = new TopoSort.Vertex("9");
-		TopoSort.Vertex v10 = new TopoSort.Vertex("10");
-		
-		v1.indegree = 1;
-		v1.adjacentList.add(v2);
-		
-		v2.indegree = 2;
-		v2.adjacentList.add(v3);
-		
-		v3.indegree = 2;
-		v3.adjacentList.add(v4);
-		
-		v4.indegree = 2;
-		v4.adjacentList.add(v5);
-		
-		v5.indegree = 1;
-		
-		v6.indegree = 0;
-		v6.adjacentList.add(v7);
-		v6.adjacentList.add(v8);
-		v6.adjacentList.add(v9);
-		
-		v7.indegree = 1;
-		v7.adjacentList.add(v1);
-		
-		v8.indegree = 1;
-		v8.adjacentList.add(v2);
-		
-		v9.indegree = 1;
-		v9.adjacentList.add(v4);
-		
-		v10.indegree = 0;
-		v10.adjacentList.add(v3);
-		
-		vertexes.add(v1);
-		vertexes.add(v2);
-		vertexes.add(v3);
-		vertexes.add(v4);
-		vertexes.add(v5);
-		vertexes.add(v6);
-		vertexes.add(v7);
-		vertexes.add(v8);
-		vertexes.add(v9);
-		vertexes.add(v10);
-
-		TopoSort ts = new TopoSort(vertexes);
-		List<TopoSort.Vertex> result = ts.solve();
-		
-		for(TopoSort.Vertex vertex : result) {
-			System.out.print(vertex.value + " -> ");
-		}
-	}
-	**/
-	
 	public static void testEncryption(String input) {
 		StringEncryption st = new StringEncryption(input);
 		System.out.println(st.solve());
@@ -310,7 +272,6 @@ public class Main {
 	}
 	
 	public static void testQuiz() {
-		
 		ArrayList<Quiz.Point> pointlist = new ArrayList<Quiz.Point>();
 		
 		pointlist.add(new Quiz.Point(2, 1));
@@ -322,8 +283,6 @@ public class Main {
 		
 		Quiz qz = new Quiz(3, pointlist);
 		qz.solve();
-		
-		
 	}
 	
 	public static void testNumeric() {
