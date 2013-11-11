@@ -1,10 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+import com.ex.algorithm.graph.Routing;
 import com.ex.algorithm.graph.SortingGame;
 import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
@@ -22,6 +22,7 @@ public class Main {
 	private static String line;
 
 	public static void main(String[] args) {
+		/**
 		reader = new BufferedReader(new InputStreamReader(System.in));
 
         int cases = 0;
@@ -35,6 +36,8 @@ public class Main {
         	}
         	testSortingGame(input);
         }
+        **/
+		testRouting();
 	}
 	
 	private static String peekToken() {
@@ -71,6 +74,10 @@ public class Main {
 		return nextToken();
 	}
 
+	public static void testRouting() {
+		Routing rt = new Routing();
+		rt.solve();
+	}
 
 	public static void testSortingGame(ArrayList<Integer> input) {
 		SortingGame sg = new SortingGame(input);
@@ -92,14 +99,14 @@ public class Main {
 	public static void testEventText() {
 		
 		ArrayList<String> text = new ArrayList<String>();
-//		text.add("ÇÚµð ¹æ°É·¹ ¸®ÇÊ/°É·¹/¹Ð´ë/Ã»¼Ò±â/ÃÊ±Ø¼¼»ç/À¯¸®Ã¢/Ã¢¹®/¼¼Â÷/ÁÁÀºÁý²Ù¹Ì±â/AJ5521");
-		text.add("[¿£Æ½°¡±¸]¿£Æ½Ã¥»ó/ÁÂ½ÄÄÄÇ»ÅÍÃ¥»ó/PCÃ¥»ó¼¼Æ®/À¯¼±ÄÄÇ»ÅÍÃ¥»ó GA454-6");
-		text.add("¡ß¹«·á¹è¼Û/¼­ÀÎ¿µ ¸¶½ºÄ«¶ó¡ß¸ÞÀÌºí¸° »þÀÌ´Ï ºí·¢ ¸¶½ºÄ«¶ó+´ë¿ë·®È­Àå¼Ø¡ß");
-		text.add("[ÆÄ°Ý¼¼ÀÏ!!]¾Å¾Å ÁÖ´Ï¾î Áß±¹¾î 2 (CD 1 + º°Ã¥ 1 Æ÷ÇÔ)");
-		text.add("ÇÚµð ¹æ°É·¹ ¸®ÇÊ/°É·¹/¹Ð´ë/Ã»¼Ò±â/ÃÊ±Ø¼¼»ç/À¯¸®Ã¢/Ã¢¹®/¼¼Â÷/ÁÁÀºÁý²Ù¹Ì±â/AJ5521");
-		text.add("[ÆÄ°Ý¼¼ÀÏ!!]ÄÚ·¼±×¸°Æ¼ ¼ÒÁ¢½Ã1P/ÄÚ·¼ÇÏ¿ì½º/¿ø´õÅ°Ä£ ");
-		text.add("[ÆÄ°Ý¼¼ÀÏ!!]Ãà±¸°ø(102)");
-		text.add("[ÆÄ°Ý¼¼ÀÏ!!]FBI ½ÃÅ©¸´");
+//		text.add("ï¿½Úµï¿½ ï¿½ï¿½É·ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½É·ï¿½/ï¿½Ð´ï¿½/Ã»ï¿½Ò±ï¿½/ï¿½Ê±Ø¼ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Ã¢/Ã¢ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¹Ì±ï¿½/AJ5521");
+		text.add("[ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½Æ½Ã¥ï¿½ï¿½/ï¿½Â½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½Ã¥ï¿½ï¿½/PCÃ¥ï¿½ï¿½Æ®/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½Ã¥ï¿½ï¿½ GA454-6");
+		text.add("ï¿½ß¹ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ß¸ï¿½ï¿½Ìº? ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½? ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½+ï¿½ï¿½ë·®È­ï¿½ï¿½Ø¡ï¿½");
+		text.add("[ï¿½Ä°Ý¼ï¿½ï¿½ï¿½!!]ï¿½Å¾ï¿½ ï¿½Ö´Ï¾ï¿½ ï¿½ß±ï¿½ï¿½ï¿½ 2 (CD 1 + ï¿½ï¿½Ã¥ 1 ï¿½ï¿½ï¿½ï¿½)");
+		text.add("ï¿½Úµï¿½ ï¿½ï¿½É·ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½É·ï¿½/ï¿½Ð´ï¿½/Ã»ï¿½Ò±ï¿½/ï¿½Ê±Ø¼ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Ã¢/Ã¢ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¹Ì±ï¿½/AJ5521");
+		text.add("[ï¿½Ä°Ý¼ï¿½ï¿½ï¿½!!]ï¿½Ú·ï¿½ï¿½×¸ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1P/ï¿½Ú·ï¿½ï¿½Ï¿ì½º/ï¿½ï¿½ï¿½Å°Ä£ ");
+		text.add("[ï¿½Ä°Ý¼ï¿½ï¿½ï¿½!!]ï¿½à±¸ï¿½ï¿½(102)");
+		text.add("[ï¿½Ä°Ý¼ï¿½ï¿½ï¿½!!]FBI ï¿½ï¿½Å©ï¿½ï¿½");
 		
 		EventText et = new EventText(text);
 		et.solve();
