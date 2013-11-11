@@ -11,6 +11,7 @@ import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
+import com.ex.algorithm.test.Investment;
 import com.ex.algorithm.test.Paranoid;
 import com.ex.algorithm.test.Xhaeneung;
 import com.ex.algorithm.tree.Heap;
@@ -40,7 +41,7 @@ public class Main {
         	testXhaeneung(left, operation, right, result);
         }
         **/
-		testRouting();
+		testInvestment();
 	}
 	
 	private static String peekToken() {
@@ -105,6 +106,11 @@ public class Main {
 		else {
 			System.out.println("No");
 		}
+	}
+	
+	public static void testInvestment() {
+		Investment it = new Investment();
+		it.solve();
 	}
 
 	public static void testRouting() {
