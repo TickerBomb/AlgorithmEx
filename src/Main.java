@@ -11,9 +11,9 @@ import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
-import com.ex.algorithm.test.Investment;
 import com.ex.algorithm.test.Paranoid;
 import com.ex.algorithm.test.Picnic;
+import com.ex.algorithm.test.RecursionExam;
 import com.ex.algorithm.test.Xhaeneung;
 import com.ex.algorithm.tree.Heap;
 import com.ex.algorithm.tree.NERD;
@@ -42,7 +42,8 @@ public class Main {
         	testXhaeneung(left, operation, right, result);
         }
         **/
-		testInvestment();
+//		testInvestment();
+		testRecursionExam();
 	}
 	
 	private static String peekToken() {
@@ -116,10 +117,18 @@ public class Main {
 		}
 	}
 	
+	public static void testRecursionExam() {
+		RecursionExam re = new RecursionExam();
+//		re.solve();
+		re.solve2();
+	}
+	
+	/**
 	public static void testInvestment() {
 		Investment it = new Investment();
 		it.solve();
 	}
+	**/
 
 	public static void testRouting() {
 		Routing rt = new Routing();
