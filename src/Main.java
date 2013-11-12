@@ -5,11 +5,13 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 import com.ex.algorithm.dynamic.Boggle;
+import com.ex.algorithm.graph.Routing;
 import com.ex.algorithm.graph.SortingGame;
 import com.ex.algorithm.graph.TopoSort2;
 import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
+import com.ex.algorithm.test.Investment;
 import com.ex.algorithm.test.Paranoid;
 import com.ex.algorithm.test.Picnic;
 import com.ex.algorithm.test.Xhaeneung;
@@ -40,8 +42,7 @@ public class Main {
         	testXhaeneung(left, operation, right, result);
         }
         **/
-//		testPicnic();
-		operatortest();
+		testInvestment();
 	}
 	
 	private static String peekToken() {
@@ -114,7 +115,16 @@ public class Main {
 			System.out.println("No");
 		}
 	}
+	
+	public static void testInvestment() {
+		Investment it = new Investment();
+		it.solve();
+	}
 
+	public static void testRouting() {
+		Routing rt = new Routing();
+		rt.solve();
+	}
 	
 	private static void testBarrack() {
 //		int[][] input = {{8, 3}, {7, -4}, {8, 1}, {-2 , 1}, {6, -2}};
@@ -144,14 +154,14 @@ public class Main {
 	public static void testEventText() {
 		
 		ArrayList<String> text = new ArrayList<String>();
-//		text.add("�ڵ� ��ɷ� ����/�ɷ�/�д�/û�ұ�/�ʱؼ���/����â/â��/����/�������ٹ̱�/AJ5521");
-		text.add("[��ƽ����]��ƽå��/�½���ǻ��å��/PCå��Ʈ/������ǻ��å�� GA454-6");
-		text.add("�߹�����/���ο� ����ī��߸��̺��� ���̴� ���� ����ī��+��뷮ȭ��ء�");
-		text.add("[�İݼ���!!]�ž� �ִϾ� �߱��� 2 (CD 1 + ��å 1 ����)");
-		text.add("�ڵ� ��ɷ� ����/�ɷ�/�д�/û�ұ�/�ʱؼ���/����â/â��/����/�������ٹ̱�/AJ5521");
-		text.add("[�İݼ���!!]�ڷ��׸�Ƽ ������1P/�ڷ��Ͽ콺/����Űģ ");
-		text.add("[�İݼ���!!]�౸��(102)");
-		text.add("[�İݼ���!!]FBI ��ũ��");
+//		text.add("占쌘듸옙 占쏙옙占�占쏙옙占쏙옙/占심뤄옙/占싻댐옙/청占쌀깍옙/占십극쇽옙占쏙옙/占쏙옙占쏙옙창/창占쏙옙/占쏙옙占쏙옙/占쏙옙占쏙옙占쏙옙摹堅占�AJ5521");
+		text.add("[占쏙옙틱占쏙옙占쏙옙]占쏙옙틱책占쏙옙/占승쏙옙占쏙옙퓨占쏙옙책占쏙옙/PC책占쏙옙트/占쏙옙占쏙옙占쏙옙퓨占쏙옙책占쏙옙 GA454-6");
+		text.add("占쌩뱄옙占쏙옙占쏙옙/占쏙옙占싸울옙 占쏙옙占쏙옙카占쏙옙蔘占쏙옙遣? 占쏙옙占싱댐옙 占� 占쏙옙占쏙옙카占쏙옙+占쏙옙酉��옙占쌔∽옙");
+		text.add("[占식격쇽옙占쏙옙!!]占신억옙 占쌍니억옙 占쌩깍옙占쏙옙 2 (CD 1 + 占쏙옙책 1 占쏙옙占쏙옙)");
+		text.add("占쌘듸옙 占쏙옙占�占쏙옙占쏙옙/占심뤄옙/占싻댐옙/청占쌀깍옙/占십극쇽옙占쏙옙/占쏙옙占쏙옙창/창占쏙옙/占쏙옙占쏙옙/占쏙옙占쏙옙占쏙옙摹堅占�AJ5521");
+		text.add("[占식격쇽옙占쏙옙!!]占쌘뤄옙占쌓몌옙티 占쏙옙占쏙옙占쏙옙1P/占쌘뤄옙占싹우스/占쏙옙占신걜�");
+		text.add("[占식격쇽옙占쏙옙!!]占썅구占쏙옙(102)");
+		text.add("[占식격쇽옙占쏙옙!!]FBI 占쏙옙크占쏙옙");
 		
 		EventText et = new EventText(text);
 		et.solve();
