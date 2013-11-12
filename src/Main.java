@@ -11,6 +11,7 @@ import com.ex.algorithm.graph.WordConnect;
 import com.ex.algorithm.test.Barrack;
 import com.ex.algorithm.test.EventText;
 import com.ex.algorithm.test.Paranoid;
+import com.ex.algorithm.test.Picnic;
 import com.ex.algorithm.test.Xhaeneung;
 import com.ex.algorithm.tree.Heap;
 import com.ex.algorithm.tree.NERD;
@@ -39,7 +40,8 @@ public class Main {
         	testXhaeneung(left, operation, right, result);
         }
         **/
-		testBoggle();
+//		testPicnic();
+		operatortest();
 	}
 	
 	private static String peekToken() {
@@ -74,6 +76,13 @@ public class Main {
 
 	private static String getString() {
 		return nextToken();
+	}
+	
+	private static void testPicnic() {
+		int[] input = {0, 1, 1, 2, 2, 3, 3, 0, 0, 2, 1, 3};
+		Picnic p = new Picnic(4, 6, input);
+		p.solve();
+		
 	}
 	
 	private static void testBoggle() {
